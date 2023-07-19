@@ -1,0 +1,111 @@
+.mainBox{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+.imagesBox{
+    width:10%;
+ display: grid;
+ border: 2px solid red;
+}
+.imagesBox img{
+    width: 100%;
+    border: 2px solid teal;
+}
+.imageBox{
+    width: 40%;
+    position: relative;
+}
+.imageBox img{
+    transition: transform 0.3s;
+}
+.imageBox img:hover{
+    transform: scale(2.0);
+}
+.detailsBox{
+    width: 40%;
+}
+.sizeBox{
+    display: flex;
+}
+.sizeBox div{
+width: 50px;
+height: 50px;
+border-radius: 100%;
+font-weight: 700;
+font-size: 14px;
+margin-right: 10px;
+border: 2px solid #282c3f;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.sizeBox div:hover{
+    border: 2px solid #ff3e6c;
+    cursor: pointer;
+}
+.brand{
+    font-size: 24px;
+    font-weight: 700;
+}
+.title{
+    font-size: 20px;
+    font-weight: 400;
+    color: #535665;
+}
+.price{
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+.discount{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff905a;
+}
+
+.mrp{
+    font-size: 20px;
+    font-weight: 400;
+    color: #282c3f;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.taxes{
+    font-weight: 700;
+    font-size: 14px;
+    color: #03a685;
+}
+.size{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.bag{
+    font-weight: 700;
+    color: white;
+    background-color: #ff3e6c;
+    width: 50%;
+    border-radius: 4px;
+    padding-top:16px;
+    padding-bottom: 16px;
+    font-size: 16px;
+    border: 0;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.wishlist{
+    font-weight: 700;
+    width: 30%;
+    padding-top:12px;
+    padding-bottom:12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.bagBox{
+    margin-top: 20px;
+}

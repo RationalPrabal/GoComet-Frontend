@@ -1,0 +1,28 @@
+.mrp{
+    text-decoration: line-through;
+    opacity: 80%;
+}
+.price{
+    font-weight: 700;
+}
+.priceSegment>span{
+    margin-right: 8px;
+}
+.discount{
+    color: red;
+}
+.imageBox{
+    margin: auto;
+}
+.imageBox img{
+    width: 80%;
+}
+.mainBox{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 6px;
+}
+
+.title{
+    white-space: wrap;
+ font-size: 14px;
+}
