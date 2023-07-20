@@ -1,0 +1,27 @@
+.leftBox{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leftBox img{
+    width: 50px;
+    height: 50px;
+}
+.mainBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    background-color: white;
+    padding-bottom: 10px;
+}
+.rightBox{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
