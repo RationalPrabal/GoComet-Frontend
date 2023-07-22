@@ -1,0 +1,40 @@
+.mainDiv{
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .filterDiv{
+    width: 20%;
+  }
+  .productDiv{
+    width: 70%;
+    
+  }
+.filterButton{
+  display: none;
+  
+}
+  @media screen and (max-width:700px) {
+    
+    .productDiv{
+      width: 100%;
+
+    }
+   .filterDiv{
+    position: absolute;
+    left: 0;
+    top:10
+   }
+   .filterButton{
+    display: flex;
+    margin-top: 70px;
+    justify-content: center;
+   }
+   .filterButton button{
+    background-color: #ff3e6c;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+
+   }
+  }

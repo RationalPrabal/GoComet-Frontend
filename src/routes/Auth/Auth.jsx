@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import styles from "./Auth.module.css";
 import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../components/Firebase/Firebase";
+import { auth, provider } from "../../components/Firebase/Firebase";
 import { useNavigate } from "react-router-dom";
 export default function Auth() {
   const nav = useNavigate();

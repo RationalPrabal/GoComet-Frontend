@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SingleProduct from "../Single Product/SingleProduct";
 import styles from "./Product.module.css";
 import { CartContext } from "../../context/CartContext";
-export default function Product({ selected, brand, color }) {
+export default function Product({ selected, brand, color, price }) {
   const [products, setProducts] = React.useState([]);
   const { query } = useContext(CartContext);
-  console.log(query);
+  const [loader, setLoader] = useState(false);
   const getProducts = async () => {
+    setLoader(true);
     let URL;
     if (selected.men && selected.women) {
       URL = `${process.env.REACT_APP_BASE_URL}/products?gender=men&&gender=women`;
@@ -19,6 +20,8 @@ export default function Product({ selected, brand, color }) {
       URL = `${process.env.REACT_APP_BASE_URL}/products?brand=${brand}`;
     } else if (color) {
       URL = `${process.env.REACT_APP_BASE_URL}/products?q=${color}`;
+    } else if (price.min || price.max) {
+      URL = `${process.env.REACT_APP_BASE_URL}/products?price_gte=${price.min}&price_lte=${price.max}`;
     } else {
       URL = `${process.env.REACT_APP_BASE_URL}/products`;
     }
@@ -26,9 +29,11 @@ export default function Product({ selected, brand, color }) {
       const result = await axios.get(URL);
       setProducts(result.data);
     } catch (error) {}
+    setLoader(false);
   };
 
   async function onSearch(query) {
+    setLoader(true);
     try {
       let result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/products?q=${query}`
@@ -38,10 +43,11 @@ export default function Product({ selected, brand, color }) {
     } catch (error) {
       console.log(error.message);
     }
+    setLoader(false);
   }
   React.useEffect(() => {
     getProducts();
-  }, [selected, brand, color]);
+  }, [selected, brand, color, price]);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -51,7 +57,11 @@ export default function Product({ selected, brand, color }) {
     // Cleanup the timer when the component unmounts or the search query changes
     return () => clearTimeout(timerId);
   }, [query]);
-  return (
+  return loader ? (
+    <div className={styles.loader}>
+      <img src="./loader.gif" alt="loader" />
+    </div>
+  ) : (
     <div className={styles.ProductBox}>
       {products?.length &&
         products.map((product) => (

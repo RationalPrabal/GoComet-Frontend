@@ -11,3 +11,15 @@
     left: 0;
     top:80px;
 }
+.filterButton{
+    display: none;
+}
+@media screen and (max-width: 768px){
+    .mainBox{
+  z-index: 99;
+  background-color: white;
+  padding-right: 25px;
+  margin-top: 20px;
+    }
+   
+}

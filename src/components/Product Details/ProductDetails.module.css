@@ -12,14 +12,16 @@
 }
 .imagesBox img{
     width: 100%;
-   
 }
 .imageBox{
     width: 40%;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 .imageBox img{
     transition: transform 0.3s;
+    width: 100%;
 }
 .imageBox img:hover{
     transform: scale(2.0);
@@ -111,3 +113,108 @@ align-items: center;
 .bagBox{
     margin-top: 20px;
 }
+.mainBoxMobile{
+    display: none;
+}
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 200px;
+}
+.loader img{
+    width: 400px;
+}
+@media screen and (min-width:750px) and (max-width:900px) {
+.mainBox{
+    width: 100%;
+}
+}
+
+@media screen and (max-width:750px) {
+    .mainBox{
+        display: none;
+    }
+    .mainBoxMobile{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+    
+    }
+.imagesBox{
+    display: flex;
+    justify-content: center;
+}
+.imageBox{
+    width: 200px;
+}
+.imagesBox{
+    width: 50px;
+}
+.detailsBox{
+    width: 300px;
+   
+}
+.brand{
+    font-size: 18px;
+    font-weight: 700;
+}
+.title{
+    font-size: 14px;
+    font-weight: 400;
+    color: #535665;
+}
+.price{
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+.discount{
+    font-size: 14px;
+    font-weight: 700;
+    color: #ff905a;
+}
+
+.mrp{
+    font-size: 14px;
+    font-weight: 400;
+    color: #282c3f;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.taxes{
+    font-weight: 700;
+    font-size: 10px;
+    color: #03a685;
+}
+.size{
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.bag{
+    font-weight: 700;
+    color: white;
+    background-color: #ff3e6c;
+    width: 50%;
+    border-radius: 4px;
+    padding: top 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+    border: 0;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.wishlist{
+    font-weight: 700;
+    width: 30%;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+    }

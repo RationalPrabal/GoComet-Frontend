@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import ProductDetails from "../components/Product Details/ProductDetails";
-import HomePage from "./HomePage";
-import Auth from "./Auth";
+import ProductDetails from "../../components/Product Details/ProductDetails";
+import HomePage from "../Homepage/HomePage";
+import Auth from "../Auth/Auth";
 
 export default function AllRoutes() {
   return (

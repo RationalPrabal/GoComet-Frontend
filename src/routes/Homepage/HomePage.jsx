@@ -1,0 +1,59 @@
+import React, { useEffect, useState } from "react";
+import Filter from "../../components/Filter/Filter";
+import Product from "../../components/Product/Product";
+import styles from "./HomePage.module.css";
+
+export default function HomePage() {
+  const [selected, setSelected] = useState({
+    men: false,
+    women: false,
+  });
+  const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("");
+  const [price, setPrice] = useState({
+    min: "",
+    max: "",
+  });
+  const [show, setShow] = useState(true);
+
+  function brandFunction(val) {
+    setBrand(val);
+  }
+  function colorFunction(val) {
+    setColor(val);
+  }
+  function priceFunction(val) {
+    setPrice(val);
+  }
+
+  return (
+    <>
+      <div className={styles.filterButton}>
+        <button onClick={() => setShow(!show)}>
+          {!show ? "Apply Filters" : "Close Filters"}
+        </button>
+      </div>
+      <div className={styles.mainDiv}>
+        <div className={styles.filterDiv}>
+          <Filter
+            setSelected={setSelected}
+            selected={selected}
+            brandFunction={brandFunction}
+            colorFunction={colorFunction}
+            priceFunction={priceFunction}
+            show={show}
+          />
+        </div>
+
+        <div className={styles.productDiv}>
+          <Product
+            selected={selected}
+            brand={brand}
+            color={color}
+            price={price}
+          />
+        </div>
+      </div>
+    </>
+  );
+}

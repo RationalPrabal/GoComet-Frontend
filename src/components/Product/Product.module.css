@@ -6,4 +6,24 @@
     row-gap: 12px;
     margin-top: 80px;
 }
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 200px;
+}
+.loader img{
+    width: 400px;
+}
+@media screen and (min-width:400px) and (max-width:700px) {
+    .ProductBox{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
 
+@media screen and  (max-width:400px) {
+    .ProductBox{
+        grid-template-columns: repeat(1,1fr);
+    }
+}

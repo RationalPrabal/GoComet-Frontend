@@ -2,7 +2,10 @@
     width: 30%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center
+}
+.logo{
+    width: 60px;
 }
 .leftBox img{
     width: 50px;
@@ -18,10 +21,52 @@
     right:0;
     background-color: white;
     padding-bottom: 10px;
+    width: 90%;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
 }
 .rightBox{
     width: 30%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.hamburger{
+    display: none;
+}
+@media screen and (min-width:550px) and (max-width:1000px){
+    .leftBox{
+        width: 50%;
+    }
+    .rightBox{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .mainBox{
+     display: grid;
+        left: 0;
+        top: 20px;
+       width: 100%;
+     z-index: 111;
+    }
+    
+    .leftBox{
+       display: grid;
+        gap: 10px;
+    }
+    .rightBox{
+       display: grid;
+       margin-top: 6px;
+        gap: 10px;
+    }
+    .hamburger{
+        display: flex;
+        font-size: 24px;
+        position: fixed;
+        z-index: 111;
+        top: 0;
+    }
 }
