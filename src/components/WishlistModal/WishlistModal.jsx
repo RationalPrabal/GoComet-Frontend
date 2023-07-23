@@ -26,7 +26,7 @@ export default function WishlistModal() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Cart Items</ModalHeader>
+          <ModalHeader>Wishlist Items</ModalHeader>
           <ModalCloseButton />
           {wishlistItems?.length === 0 ? (
             <EmptyCartLoader location="wishlist" />

@@ -16,7 +16,7 @@ export default function HomePage() {
   });
   const [order, setOrder] = useState("");
   const [show, setShow] = useState(true);
-
+  const [width, setWidth] = useState(window.innerWidth);
   function brandFunction(val) {
     setBrand(val);
   }
@@ -29,6 +29,11 @@ export default function HomePage() {
   function orderFunction(val) {
     setOrder(val);
   }
+  useEffect(() => {
+    if (width < 701) {
+      setShow(false);
+    }
+  }, []);
   return (
     <>
       <div className={styles.filterButton}>

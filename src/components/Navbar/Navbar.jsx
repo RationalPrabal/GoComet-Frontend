@@ -23,6 +23,7 @@ export default function Navbar() {
   const { userId, getUserId, LogoutUser, setAuth, isAuth } =
     useContext(AuthContext);
   const [show, setShow] = useState(true);
+  const [width, setWidth] = useState(window.innerWidth);
   const toast = useToast();
   const nav = useNavigate();
   React.useEffect(() => {
@@ -34,7 +35,11 @@ export default function Navbar() {
       getUserData(userId);
     }
   }, [userId]);
-
+  React.useEffect(() => {
+    if (width < 551) {
+      setShow(false);
+    }
+  }, []);
   return (
     <>
       {" "}
@@ -105,7 +110,8 @@ export default function Navbar() {
               )}
             </div>
             <div style={{ display: "flex" }}>
-              <CartModal />({user?.cart.length})
+              <CartModal />
+              {isAuth ? `(${user?.cart.length})` : ""}
             </div>
             <WishlistModal />
           </div>
