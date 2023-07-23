@@ -12,6 +12,7 @@ export default function ProductDetails() {
   const { user, getUserData } = useContext(CartContext);
   const { isAuth } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const [size, setSize] = useState("");
   const toast = useToast();
 
   const getSingleProduct = async () => {
@@ -22,9 +23,7 @@ export default function ProductDetails() {
       );
       setProduct(result.data);
       setMainImage(result.data.images[0]);
-    } catch (error) {
-      console.log(error.message);
-    }
+    } catch (error) {}
     setLoading(false);
   };
   const AddToCart = async () => {
@@ -32,6 +31,7 @@ export default function ProductDetails() {
       user?.cart?.push({
         ...product,
         quantity: 1,
+        size,
       });
 
       try {
@@ -118,9 +118,10 @@ export default function ProductDetails() {
         ) : (
           <div className={styles.mainBox}>
             <div className={styles.imagesBox}>
-              {product?.images.map((el) => {
+              {product?.images.map((el, i) => {
                 return (
                   <img
+                    key={i}
                     onClick={() => {
                       setMainImage(el);
                     }}
@@ -146,14 +147,44 @@ export default function ProductDetails() {
               <p className={styles.taxes}>inclusive of all taxes</p>
               <p className={styles.size}>Select Size</p>
               <div className={styles.sizeBox}>
-                <div>S</div>
-                <div>M</div>
-                <div>L</div>
-                <div>XL</div>
-                <div>2XL</div>
+                <div
+                  style={{ border: size === "S" ? "2px solid red" : "" }}
+                  onClick={(e) => setSize(e.target.innerText)}
+                >
+                  S
+                </div>
+                <div
+                  style={{ border: size === "M" ? "2px solid red" : "" }}
+                  onClick={(e) => setSize(e.target.innerText)}
+                >
+                  M
+                </div>
+                <div
+                  style={{ border: size === "L" ? "2px solid red" : "" }}
+                  onClick={(e) => setSize(e.target.innerText)}
+                >
+                  L
+                </div>
+                <div
+                  style={{ border: size === "XL" ? "2px solid red" : "" }}
+                  onClick={(e) => setSize(e.target.innerText)}
+                >
+                  XL
+                </div>
+                <div
+                  style={{ border: size === "2XL" ? "2px solid red" : "" }}
+                  onClick={(e) => setSize(e.target.innerText)}
+                >
+                  2XL
+                </div>
               </div>
               <div className={styles.bagBox}>
-                <button className={styles.bag} onClick={() => AddToCart()}>
+                <button
+                  disabled={size === ""}
+                  style={{ cursor: size === "" ? "not-allowed" : "pointer" }}
+                  className={styles.bag}
+                  onClick={() => AddToCart()}
+                >
                   ADD TO BAG
                 </button>
                 <button
@@ -176,9 +207,10 @@ export default function ProductDetails() {
               <img src={mainImage} alt="clothes" />
             </div>
             <div className={styles.imagesBox}>
-              {product?.images.map((el) => {
+              {product?.images.map((el, i) => {
                 return (
                   <img
+                    key={i}
                     onClick={() => {
                       setMainImage(el);
                     }}
@@ -201,11 +233,16 @@ export default function ProductDetails() {
               <p className={styles.taxes}>inclusive of all taxes</p>
               <p className={styles.size}>Select Size</p>
               <div className={styles.sizeBox}>
-                <div>S</div>
-                <div>M</div>
-                <div>L</div>
-                <div>XL</div>
-                <div>2XL</div>
+                <div
+                  style={{ border: size === "S" ? "2px solid red" : "" }}
+                  onClick={(e) => setSize(e.target.innerText)}
+                >
+                  S
+                </div>
+                <div onClick={(e) => setSize(e.target.innerText)}>M</div>
+                <div onClick={(e) => setSize(e.target.innerText)}>L</div>
+                <div onClick={(e) => setSize(e.target.innerText)}>XL</div>
+                <div onClick={(e) => setSize(e.target.innerText)}>2XL</div>
               </div>
               <div className={styles.bagBox}>
                 <button className={styles.bag} onClick={() => AddToCart()}>

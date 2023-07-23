@@ -3,19 +3,21 @@ import styles from "./CartItem.module.css";
 import { CartContext } from "../../context/CartContext";
 import axios from "axios";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { useToast } from "@chakra-ui/react";
 export default function CartItem({
   id,
   brand,
   title,
-
   price,
   mrp,
   discount,
   images,
   quantity,
+  size,
 }) {
   const { user, getUserData } = useContext(CartContext);
   const [quant, setQuant] = useState(quantity);
+  const toast = useToast();
   const changeQuantity = async (id, change) => {
     const newUserCart = user?.cart.map((el) => {
       if (el.id === id) {
@@ -43,6 +45,12 @@ export default function CartItem({
       await axios.patch(`${process.env.REACT_APP_BASE_URL}/users/${user.id}`, {
         cart: newUserCart,
       });
+      toast({
+        title: "Item Deleted Successfully",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
       getUserData(user.id);
     } catch {}
   };
@@ -64,6 +72,13 @@ export default function CartItem({
         cart: user.cart,
         wishlist: user.wishlist,
       });
+      toast({
+        title: "Added to Wishlist Successfully",
+
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
       getUserData(user.id);
     } catch {}
   };
@@ -76,6 +91,10 @@ export default function CartItem({
         <span className={styles.price}>Rs.{price}</span>
         <span className={styles.mrp}>Rs.{mrp}</span>
         <span className={styles.discount}>{`(${discount}OFF)`}</span>
+      </p>
+      <p className={styles.size}>
+        <span>Selected Size-</span>
+        <span>{size}</span>
       </p>
       <p className={styles.totalPrice}>
         <span>Total Price</span>-<span> ₹{(price * quant).toFixed(2)}</span>

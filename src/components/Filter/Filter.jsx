@@ -6,6 +6,7 @@ export default function Filter({
   brandFunction,
   colorFunction,
   priceFunction,
+  orderFunction,
   show,
 }) {
   const handleCheckboxChange = (event) => {
@@ -185,6 +186,20 @@ export default function Filter({
             />
             <label for="more than 5000">More than ₹5000</label>
             <br></br>
+          </div>
+          <div>
+            <p className={styles.Filter}>Sort By Price</p>
+            <select
+              onChange={(e) => {
+                if (e.target.value === "option1") {
+                  orderFunction("asc");
+                } else orderFunction("desc");
+              }}
+            >
+              <option>Sort By Price</option>
+              <option value={"option1"}>Low to High</option>
+              <option value={"option2"}>High to Low</option>
+            </select>
           </div>
         </div>
       )}

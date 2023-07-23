@@ -81,7 +81,6 @@ export default function Navbar() {
                     <PopoverHeader>Hi,{user?.name}</PopoverHeader>
                     <PopoverBody>
                       <Box display={"grid"}>
-                        <Button color={"green.300"}>Go to Profile</Button>
                         <Button
                           color={"red.300"}
                           onClick={() => {
@@ -105,8 +104,8 @@ export default function Navbar() {
                 </Popover>
               )}
             </div>
-            <div>
-              <CartModal />
+            <div style={{ display: "flex" }}>
+              <CartModal />({user?.cart.length})
             </div>
             <WishlistModal />
           </div>

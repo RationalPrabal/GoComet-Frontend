@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import SingleProduct from "../Single Product/SingleProduct";
 import styles from "./Product.module.css";
 import { CartContext } from "../../context/CartContext";
-export default function Product({ selected, brand, color, price }) {
+export default function Product({ selected, brand, color, price, order }) {
   const [products, setProducts] = React.useState([]);
   const { query } = useContext(CartContext);
   const [loader, setLoader] = useState(false);
@@ -22,6 +22,8 @@ export default function Product({ selected, brand, color, price }) {
       URL = `${process.env.REACT_APP_BASE_URL}/products?q=${color}`;
     } else if (price.min || price.max) {
       URL = `${process.env.REACT_APP_BASE_URL}/products?price_gte=${price.min}&price_lte=${price.max}`;
+    } else if (order) {
+      URL = `${process.env.REACT_APP_BASE_URL}/products?_sort=price&_order=${order}`;
     } else {
       URL = `${process.env.REACT_APP_BASE_URL}/products`;
     }
@@ -38,7 +40,7 @@ export default function Product({ selected, brand, color, price }) {
       let result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/products?q=${query}`
       );
-      console.log(result.data);
+
       setProducts(result.data);
     } catch (error) {
       console.log(error.message);
@@ -47,12 +49,12 @@ export default function Product({ selected, brand, color, price }) {
   }
   React.useEffect(() => {
     getProducts();
-  }, [selected, brand, color, price]);
+  }, [selected, brand, color, price, order]);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       onSearch(query);
-    }, 5000);
+    }, 3000);
 
     // Cleanup the timer when the component unmounts or the search query changes
     return () => clearTimeout(timerId);

@@ -14,6 +14,7 @@ export default function HomePage() {
     min: "",
     max: "",
   });
+  const [order, setOrder] = useState("");
   const [show, setShow] = useState(true);
 
   function brandFunction(val) {
@@ -25,7 +26,9 @@ export default function HomePage() {
   function priceFunction(val) {
     setPrice(val);
   }
-
+  function orderFunction(val) {
+    setOrder(val);
+  }
   return (
     <>
       <div className={styles.filterButton}>
@@ -41,6 +44,7 @@ export default function HomePage() {
             brandFunction={brandFunction}
             colorFunction={colorFunction}
             priceFunction={priceFunction}
+            orderFunction={orderFunction}
             show={show}
           />
         </div>
@@ -51,6 +55,7 @@ export default function HomePage() {
             brand={brand}
             color={color}
             price={price}
+            order={order}
           />
         </div>
       </div>
