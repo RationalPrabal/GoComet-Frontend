@@ -2,7 +2,9 @@
     width: 100px;
     
 }
-
+.mainBox{
+    margin-top: 12px;
+}
 .brand{
     font-size: 16px;
     font-weight: 700;

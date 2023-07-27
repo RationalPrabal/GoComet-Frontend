@@ -3,32 +3,74 @@ import React, { useContext, useEffect, useState } from "react";
 import SingleProduct from "../Single Product/SingleProduct";
 import styles from "./Product.module.css";
 import { CartContext } from "../../context/CartContext";
-export default function Product({ selected, brand, color, price, order }) {
+export default function Product({ filter }) {
   const [products, setProducts] = React.useState([]);
   const { query } = useContext(CartContext);
   const [loader, setLoader] = useState(false);
   const getProducts = async () => {
     setLoader(true);
-    let URL;
-    if (selected.men && selected.women) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?gender=men&&gender=women`;
-    } else if (selected.men) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?gender=men`;
-    } else if (selected.women) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?gender=women`;
-    } else if (brand) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?brand=${brand}`;
-    } else if (color) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?q=${color}`;
-    } else if (price.min || price.max) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?price_gte=${price.min}&price_lte=${price.max}`;
-    } else if (order) {
-      URL = `${process.env.REACT_APP_BASE_URL}/products?_sort=price&_order=${order}`;
-    } else {
-      URL = `${process.env.REACT_APP_BASE_URL}/products`;
+    let baseURL = `${process.env.REACT_APP_BASE_URL}/products`;
+    console.log(baseURL);
+    let flag = false;
+    if (filter.price.length > 0) {
+      flag = true;
+      filter.price.forEach((el) => {
+        baseURL = baseURL + "?price_gte=" + el.min + "&price_lte=" + el.max;
+      });
     }
+    if (filter.brand.length > 0) {
+      if (flag) {
+        filter.brand.forEach((el) => {
+          baseURL = baseURL + "&brand=" + el;
+        });
+      } else {
+        filter.brand.forEach((el) => {
+          if (flag) {
+            baseURL = baseURL + "&brand=" + el;
+          } else baseURL = baseURL + "?brand=" + el;
+          flag = true;
+        });
+      }
+    }
+
+    if (filter.gender.length > 0) {
+      if (flag) {
+        filter.gender.forEach((el) => {
+          baseURL = baseURL + "&gender=" + el;
+        });
+      } else {
+        filter.gender.forEach((el) => {
+          if (flag) {
+            baseURL = baseURL + "&gender=" + el;
+          } else baseURL = baseURL + "?gender=" + el;
+          flag = true;
+        });
+      }
+    }
+    if (filter.color.length > 0) {
+      if (flag) {
+        filter.color.forEach((el) => {
+          baseURL = baseURL + "&title_like=" + el;
+        });
+      } else {
+        filter.color.forEach((el) => {
+          if (flag) {
+            baseURL = baseURL + "&title_like=" + el;
+          } else baseURL = baseURL + "?title_like=" + el;
+          flag = true;
+        });
+      }
+    }
+    if (filter.sort) {
+      if (flag) {
+        baseURL = baseURL + "&_sort=price&_order=" + filter.sort;
+      } else {
+        baseURL = baseURL + "?_sort=price&_order=" + filter.sort;
+      }
+    }
+    console.log(baseURL);
     try {
-      const result = await axios.get(URL);
+      const result = await axios.get(baseURL);
       setProducts(result.data);
     } catch (error) {}
     setLoader(false);
@@ -49,7 +91,7 @@ export default function Product({ selected, brand, color, price, order }) {
   }
   React.useEffect(() => {
     getProducts();
-  }, [selected, brand, color, price, order]);
+  }, [filter]);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -65,10 +107,19 @@ export default function Product({ selected, brand, color, price, order }) {
     </div>
   ) : (
     <div className={styles.ProductBox}>
-      {products?.length &&
+      {products?.length ? (
         products.map((product) => (
           <SingleProduct key={product.id} {...product} />
-        ))}
+        ))
+      ) : (
+        <div className={styles.mainBox}>
+          <img
+            src="https://constant.myntassets.com/checkout/assets/img/empty-bag.webp"
+            alt="no products found"
+          />
+          <p className={styles.emptyPara}>No Products found</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -16,6 +16,19 @@
 .loader img{
     width: 400px;
 }
+.emptyPara{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 80%;
+    text-align: center;
+}
+
+.mainBox{
+    text-align: center;
+    width: 90%;
+    margin: auto;
+}
 @media screen and (min-width:400px) and (max-width:700px) {
     .ProductBox{
         grid-template-columns: repeat(2,1fr);
